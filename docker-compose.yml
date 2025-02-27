@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  basic-app-web:
+    container_name: "basicApp-web"
+    build:
+      context: "../basicApp-web/"
+      dockerfile: "Dockerfile.prod_like_dev"
+    volumes:
+      - ../basicApp-web:/app
+      - /app/node_modules
+    ports:
+      - "80:80"
+    depends_on:
+      - basic-app-app
+
+  basic-app-app:
+    container_name: "basicApp-app"
+    build:
+      context: "../basicApp-app/"
+      dockerfile: "Dockerfile.dev"
+    volumes:
+      - ../basicApp-app:/app
+      - /app/node_modules
+    depends_on:
+      - basic-app-db
+
+  basic-app-db:
+    container_name: "basicApp-db"
+    image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    restart: "always"

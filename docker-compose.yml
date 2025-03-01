@@ -5,10 +5,12 @@ services:
     container_name: "basicApp-web"
     build:
       context: "../basicApp-web/"
-      dockerfile: "Dockerfile.prod_like_dev"
+      dockerfile: "Dockerfile.prod"
     volumes:
       - ../basicApp-web:/app
       - /app/node_modules
+    environment:
+      - DOMAIN=basic-app-app
     ports:
       - "80:80"
     depends_on:

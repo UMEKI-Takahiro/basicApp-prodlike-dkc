@@ -10,7 +10,7 @@ services:
       - ../basicApp-web:/app
       - /app/node_modules
     environment:
-      - DOMAIN=basic-app-app
+      - LOCAL_APP_DOMAIN=basic-app-app
     ports:
       - "80:80"
     depends_on:
